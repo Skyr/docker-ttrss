@@ -1,0 +1,14 @@
+#!/usr/bin/with-contenv sh
+mkdir -p /var/www/ttrss/docker/themes /var/www/ttrss/docker/plugins
+cp /var/www/ttrss/config.php-dist /var/www/ttrss/docker/
+chgrp -R www-data /var/www/ttrss/docker
+rm -rf /var/www/ttrss/lock/*
+#if [ ! -f /var/www/ttrss/docker/config.php ] ; then
+#  echo "config.php is missing - halting container"
+#  s6-nuke -h
+#  sleep 3
+#  s6-nuke -k
+#fi
+
+#cd /srv && ./setup-ttrss.sh
+
