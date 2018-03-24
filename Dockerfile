@@ -59,4 +59,7 @@ RUN cd /var/www/ttrss && \
 # Copy root file system.
 COPY root /
 
+HEALTHCHECK --interval=1m --timeout=10s --start-period=1m \
+  CMD wget -q -O - http://127.0.0.1:8080/ > /dev/null 2>&1
+
 ENTRYPOINT ["/init"]
