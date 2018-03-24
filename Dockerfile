@@ -9,12 +9,13 @@ LABEL description="A self-hosted Tiny Tiny RSS (TTRSS) environment." \
 EXPOSE 8080
 
 # Expose default database credentials via ENV
-#ENV DB_HOST ttrssdb
-#ENV DB_PORT 3306
-#ENV DB_TYPE mysql
-#ENV DB_NAME ttrss
-#ENV DB_USER ttrss
-#ENV DB_PASS ttrss
+ENV DB_HOST ttrssdb
+ENV DB_PORT 3306
+ENV DB_TYPE mysql
+ENV DB_NAME ttrss
+ENV DB_USER ttrss
+ENV DB_PASS ttrss
+ENV BASE_URL http://localhost:8080/
 
 # Expose volumes
 VOLUME [ "/var/www/ttrss/docker" ]
@@ -29,12 +30,12 @@ RUN set -xe && \
     apk update && apk upgrade && \
     apk add --no-cache --virtual=run-deps \
     nginx git ca-certificates \
-    #py-setuptools \
+    py-setuptools \
     php5 php5-fpm php5-curl php5-dom php5-gd php5-json php5-mcrypt php5-pcntl php5-iconv \
     php5-pdo php5-pdo_pgsql php5-pgsql php5-pdo_mysql php5-mysql php5-mysqli php5-posix && \
     apk del --progress --purge && \
     rm -rf /var/cache/apk/*
-#RUN easy_install-2.7 j2cli
+RUN easy_install-2.7 j2cli
 
 # Add user www-data for php-fpm.
 # 82 is the standard uid/gid for "www-data" in Alpine.

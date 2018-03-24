@@ -3,12 +3,10 @@ mkdir -p /var/www/ttrss/docker/themes /var/www/ttrss/docker/plugins
 cp /var/www/ttrss/config.php-dist /var/www/ttrss/docker/
 chgrp -R www-data /var/www/ttrss/docker
 rm -rf /var/www/ttrss/lock/*
-#if [ ! -f /var/www/ttrss/docker/config.php ] ; then
-#  echo "config.php is missing - halting container"
-#  s6-nuke -h
-#  sleep 3
-#  s6-nuke -k
-#fi
+if [ ! -f /var/www/ttrss/docker/config.php ] ; then
+  j2 /srv/config.php.j2 > /var/www/ttrss/docker/config.php
+fi
+php -f /srv/ttrss-configure-db.php
 
 #cd /srv && ./setup-ttrss.sh
 
