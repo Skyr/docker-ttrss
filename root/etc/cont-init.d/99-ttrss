@@ -7,6 +7,7 @@ if [ ! -f /var/www/ttrss/docker/config.php ] ; then
   j2 /srv/config.php.j2 > /var/www/ttrss/docker/config.php
 fi
 php -f /srv/ttrss-configure-db.php
+echo yes | s6-setuidgid www-data php -f /var/www/ttrss/update.php -- --update-schema
 
 #cd /srv && ./setup-ttrss.sh
 
