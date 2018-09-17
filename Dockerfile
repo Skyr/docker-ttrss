@@ -1,6 +1,6 @@
 # Using https://github.com/gliderlabs/docker-alpine,
 # plus  https://github.com/just-containers/s6-overlay for a s6 Docker overlay.
-FROM alpine:3.7
+FROM alpine:3.8
 # Initially was based on work of Christian Lück <christian@lueck.tv>.
 LABEL description="A self-hosted Tiny Tiny RSS (TTRSS) environment." \
       maintainer="Stefan Schlott <stefan@ploing.de>"
@@ -22,7 +22,7 @@ VOLUME [ "/var/www/ttrss/docker" ]
 
 # Add s6 overlay.
 RUN cd /var/tmp && \
-  wget -q https://github.com/just-containers/s6-overlay/releases/download/v1.21.4.0/s6-overlay-amd64.tar.gz && \
+  wget -q https://github.com/just-containers/s6-overlay/releases/download/v1.21.7.0/s6-overlay-amd64.tar.gz && \
   tar xzf s6-overlay-amd64.tar.gz -C /  && rm s6-overlay-amd64.tar.gz
 
 # Install dependencies
@@ -42,7 +42,7 @@ RUN easy_install-2.7 j2cli
 RUN adduser -u 82 -D -S -G www-data www-data
 
 # Fetch ttrss
-ENV ttrss_rev 4fa64e8446563a89f04badfdfecc8a57750c083d
+ENV ttrss_rev 1cf69d435d7b31c803d956692020c3d5f74df90d
 RUN mkdir -p /var/www/ttrss && \
   cd /var/www/ttrss && \
   git init . && \
