@@ -1,6 +1,7 @@
 # Using https://github.com/gliderlabs/docker-alpine,
 # plus  https://github.com/just-containers/s6-overlay for a s6 Docker overlay.
-FROM alpine:3.8
+# alpine 3.8 php is currently broken: https://bugs.alpinelinux.org/issues/9237
+FROM alpine:edge
 # Initially was based on work of Christian Lück <christian@lueck.tv>.
 LABEL description="A self-hosted Tiny Tiny RSS (TTRSS) environment." \
       maintainer="Stefan Schlott <stefan@ploing.de>"
@@ -31,7 +32,7 @@ RUN set -xe && \
     apk add --no-cache --virtual=run-deps \
     nginx git ca-certificates \
     py-setuptools \
-    php5 php5-fpm php5-curl php5-dom php5-gd php5-json php5-mcrypt php5-pcntl php5-iconv \
+    php5-fpm php5-cli php5-curl php5-dom php5-gd php5-json php5-mcrypt php5-pcntl php5-iconv \
     php5-pdo php5-pdo_pgsql php5-pgsql php5-pdo_mysql php5-mysql php5-mysqli php5-posix && \
     apk del --progress --purge && \
     rm -rf /var/cache/apk/*
