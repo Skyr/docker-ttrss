@@ -21,9 +21,16 @@ if [[ -f lastupdate.sh ]] ; then
   . ./lastupdate.sh
 fi
 
-# Update necessary?
-if [[ "$DOCKER_REV" == "$CURRENT_DOCKER_REV" && "$TTRSS_REV" == "$CURRENT_TTRSS_REV" ]] ; then
-  exit 0
+if [[ "$1" == "-f" ]] ; then
+  BASEIMAGE=`grep "^FROM" ../Dockerfile | sed "s/^FROM *//"`
+  if [[ "$BASEIMAGE" != "" ]] ; then
+    docker pull $BASEIMAGE
+  fi
+else
+  # Update necessary?
+  if [[ "$DOCKER_REV" == "$CURRENT_DOCKER_REV" && "$TTRSS_REV" == "$CURRENT_TTRSS_REV" ]] ; then
+    exit 0
+  fi
 fi
 
 # Get config version (will be the Docker label)
