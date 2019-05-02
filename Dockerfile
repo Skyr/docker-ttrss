@@ -32,18 +32,20 @@ RUN set -xe && \
     apk add --no-cache --virtual=run-deps \
     nginx git ca-certificates \
     py-setuptools \
-    php5-fpm php5-cli php5-curl php5-dom php5-gd php5-json php5-mcrypt php5-pcntl php5-iconv \
-    php5-pdo php5-pdo_pgsql php5-pgsql php5-pdo_mysql php5-mysql php5-mysqli php5-posix && \
+    php7-fpm php7-cli php7-curl php7-dom php7-gd php7-json php7-mcrypt php7-pcntl php7-iconv \
+    php7-pdo php7-pdo_mysql php7-mysqli php7-posix php7-intl php7-mbstring php7-fileinfo php7-session && \
     apk del --progress --purge && \
     rm -rf /var/cache/apk/*
 RUN easy_install-2.7 j2cli
+# RUN ln -s /usr/bin/php7 /usr/bin/php && \
+RUN ln -s /usr/sbin/php-fpm7 /usr/bin/php-fpm
 
 # Add user www-data for php-fpm.
 # 82 is the standard uid/gid for "www-data" in Alpine.
 RUN adduser -u 82 -D -S -G www-data www-data
 
 # Fetch ttrss
-ENV ttrss_rev 1cf69d435d7b31c803d956692020c3d5f74df90d
+ENV ttrss_rev ae376bdfbf96242a3b0df13f6c26a0785da573fe
 RUN mkdir -p /var/www/ttrss && \
   cd /var/www/ttrss && \
   git init . && \

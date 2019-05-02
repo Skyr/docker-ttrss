@@ -45,8 +45,8 @@ CURRENT_DOCKER_REV=`git log -n 1 --format="%H"`
 # Build and push Docker
 pushd .. > /dev/null
 docker build  -t skyr0/ttrss:latest -t skyr0/ttrss:$CFG_VERSION .
-docker push skyr0/ttrss:$CFG_VERSION
-docker push skyr0/ttrss:latest
+#docker push skyr0/ttrss:$CFG_VERSION
+#docker push skyr0/ttrss:latest
 popd > /dev/null
 
 # Update data
