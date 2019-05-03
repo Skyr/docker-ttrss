@@ -33,7 +33,8 @@ RUN set -xe && \
     nginx git ca-certificates \
     py-setuptools \
     php7-fpm php7-cli php7-curl php7-dom php7-gd php7-json php7-mcrypt php7-pcntl php7-iconv \
-    php7-pdo php7-pdo_mysql php7-mysqli php7-posix php7-intl php7-mbstring php7-fileinfo php7-session && \
+    php7-pdo php7-pdo_mysql php7-mysqli php7-pgsql php7-pdo_pgsql php7-posix php7-intl \
+    php7-mbstring php7-fileinfo php7-session && \
     apk del --progress --purge && \
     rm -rf /var/cache/apk/*
 RUN easy_install-2.7 j2cli
