@@ -1,4 +1,4 @@
 #!/usr/bin/with-contenv sh
 
 cd /var/www/ttrss
-exec s6-setuidgid www-data php -f /var/www/ttrss/update.php -- --update
+exec s6-setuidgid www-data php -f /var/www/ttrss/update.php -- --daemon
