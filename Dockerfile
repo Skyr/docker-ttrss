@@ -1,7 +1,6 @@
 # Using https://github.com/gliderlabs/docker-alpine,
 # plus  https://github.com/just-containers/s6-overlay for a s6 Docker overlay.
-# alpine 3.8 php is currently broken: https://bugs.alpinelinux.org/issues/9237
-FROM alpine:edge
+FROM alpine:3.10
 # Initially was based on work of Christian Lück <christian@lueck.tv>.
 LABEL description="A self-hosted Tiny Tiny RSS (TTRSS) environment." \
       maintainer="Stefan Schlott <stefan@ploing.de>"
