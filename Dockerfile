@@ -49,7 +49,7 @@ ENV ttrss_rev ae376bdfbf96242a3b0df13f6c26a0785da573fe
 RUN mkdir -p /var/www/ttrss && \
   cd /var/www/ttrss && \
   git init . && \
-  git fetch --depth=1 https://tt-rss.org/gitlab/fox/tt-rss.git ${ttrss_rev}:refs/remotes/origin/dockerrev && \
+  git fetch --depth=1 https://git.tt-rss.org/fox/tt-rss.git ${ttrss_rev}:refs/remotes/origin/dockerrev && \
   git checkout -b dockerrev origin/dockerrev
 
 RUN cd /var/www/ttrss && \
