@@ -22,7 +22,7 @@ VOLUME [ "/var/www/ttrss/docker" ]
 
 # Add s6 overlay.
 RUN cd /var/tmp && \
-  wget -q https://github.com/just-containers/s6-overlay/releases/download/v1.21.7.0/s6-overlay-amd64.tar.gz && \
+  wget -q https://github.com/just-containers/s6-overlay/releases/download/v1.22.1.0/s6-overlay-amd64.tar.gz && \
   tar xzf s6-overlay-amd64.tar.gz -C /  && rm s6-overlay-amd64.tar.gz
 
 # Install dependencies
