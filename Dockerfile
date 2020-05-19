@@ -1,6 +1,6 @@
 # Using https://github.com/gliderlabs/docker-alpine,
 # plus  https://github.com/just-containers/s6-overlay for a s6 Docker overlay.
-FROM alpine:3.10
+FROM alpine:3.11
 # Initially was based on work of Christian Lück <christian@lueck.tv>.
 LABEL description="A self-hosted Tiny Tiny RSS (TTRSS) environment." \
       maintainer="Stefan Schlott <stefan@ploing.de>"
@@ -30,13 +30,13 @@ RUN set -xe && \
     apk update && apk upgrade && \
     apk add --no-cache --virtual=run-deps \
     nginx git ca-certificates \
-    py-setuptools \
+    py3-setuptools \
     'php7-fpm>=7.3.11' php7-cli php7-curl php7-dom php7-gd php7-json php7-mcrypt php7-pcntl php7-iconv \
     php7-pdo php7-pdo_mysql php7-mysqli php7-pgsql php7-pdo_pgsql php7-posix php7-intl \
     php7-mbstring php7-fileinfo php7-session && \
     apk del --progress --purge && \
     rm -rf /var/cache/apk/*
-RUN easy_install-2.7 j2cli
+RUN easy_install-3.8 j2cli
 # RUN ln -s /usr/bin/php7 /usr/bin/php && \
 RUN ln -s /usr/sbin/php-fpm7 /usr/bin/php-fpm
 
@@ -45,7 +45,7 @@ RUN ln -s /usr/sbin/php-fpm7 /usr/bin/php-fpm
 RUN adduser -u 82 -D -S -G www-data www-data
 
 # Fetch ttrss
-ENV ttrss_rev ae376bdfbf96242a3b0df13f6c26a0785da573fe
+ENV ttrss_rev 8dc6b48ebd73b865c18e261a28f0e97ad304a39b
 RUN mkdir -p /var/www/ttrss && \
   cd /var/www/ttrss && \
   git init . && \
